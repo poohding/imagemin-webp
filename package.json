@@ -1,0 +1,39 @@
+{
+  "name": "imagemin-webp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist src/img/webp",
+    "lint": "eslint src/js || true",
+    "webp": "rimraf src/img/webp && node tool/webp.js || true",
+    "serve": "browser-sync start --server --files \"dist/*.css, dist/*.js dist/*.html\" --startPath dist/search.html",
+    "watch:html": "parcel watch src/html/search.html --public-url ./",
+    "watch:js": "onchange \"src/js\" -- run-s lint",
+    "watch:images": "onchange \"src/img\" -- run-s build:images",
+    "watch": "run-p watch:*",
+    "start": "run-p serve watch",
+    "prestart": "run-s webp",
+    "build:images": "run-s webp",
+    "build:html": "parcel build src/html/search.html --public-url ./",
+    "build": "run-s clean lint build:*"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.23.6",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^7.6.1",
+    "imagemin": "^5.3.1",
+    "imagemin-webp": "^4.1.0",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "onchange": "^3.3.0",
+    "parcel-bundler": "^1.5.1",
+    "parcel-plugin-eslint": "^1.0.3",
+    "postcss-modules": "^1.1.0",
+    "rimraf": "^2.6.2"
+  }
+}
